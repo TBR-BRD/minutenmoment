@@ -8,7 +8,7 @@ Eine Uhr im LED-Look, die zu jeder Minute des Tages einen Fakt zeigt –
 auf Deutsch: Geschichte, Kalenderdaten, Ereignisse genau zu dieser Uhrzeit, Mathe und Kurioses.
 Dazu auf Wunsch **Datum**, **Wetter** und aktuelle **Schlagzeilen**.
 
-![Minutenmoment](docs/screenshot.png)
+![Minutenmoment](docs/minutenmoment-schlagzeilen.png)
 
 - **19:45** → *Geschichte · 1945: Ende des Zweiten Weltkriegs in Europa.*
 - **21:17** → *20. Juli 1969, 21:17 Uhr deutscher Zeit: „The Eagle has landed“.*
