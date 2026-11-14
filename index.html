@@ -34,6 +34,12 @@
       <div id="dots" class="dots" aria-hidden="true"></div>
     </section>
 
+    <a id="news" class="news" href="#" target="_blank" rel="noopener" hidden>
+      <span id="newsSrc" class="news-src"></span>
+      <span id="newsTime" class="news-time"></span>
+      <span id="newsText" class="news-text"></span>
+    </a>
+
     <footer class="bottombar">
       <span class="brand">Minutenmoment</span>
       <div class="actions">
@@ -70,6 +76,10 @@
             <option value="30">alle 30 s</option>
           </select>
         </label>
+        <label class="row"><span>Schlagzeilen anzeigen</span><input type="checkbox" id="optNews"></label>
+        <label class="row"><span>Nachrichtenquelle</span>
+          <select id="optNewsSrc"><option value="alle">Alle gemischt</option></select>
+        </label>
         <label class="row"><span>Bildschirm wach halten</span><input type="checkbox" id="optWake"></label>
         <div class="row"><span>Farbe</span>
           <div class="swatches" id="swatches"></div>
@@ -104,6 +114,7 @@
       <p class="about">
         Fakten werden vorab berechnet (<code>tools/generate_facts.py</code>). Wetterdaten:
         <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>.
+        Schlagzeilen per RSS der jeweiligen Redaktionen, alle 30 Minuten aktualisiert.
         Tasten: <kbd>→</kbd> nächster Fakt · <kbd>F</kbd> Vollbild · <kbd>S</kbd> Einstellungen
       </p>
     </form>

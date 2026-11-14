@@ -12,6 +12,8 @@
     showSeconds: false,
     rotate: 15,
     wake: false,
+    showNews: true,
+    newsSrc: "tagesschau",
     color: "#ffb000",
     unit: "celsius",
     location: { name: "Berlin", lat: 52.52, lon: 13.405 },
@@ -259,6 +261,63 @@
   }
   el.weather.addEventListener("click", () => openSettings());
 
+  // ------------------------------------------------------------ Schlagzeilen (data/news.json, per GitHub Action)
+  const newsEl = $("news"), newsSel = $("optNewsSrc");
+  let NEWS = null, newsItems = [], newsIdx = 0, newsRot = null, newsReload = null;
+  const fmtTime = new Intl.DateTimeFormat("de-DE", { hour: "2-digit", minute: "2-digit" });
+
+  async function loadNews() {
+    clearTimeout(newsReload);
+    newsReload = setTimeout(loadNews, 10 * 60 * 1000);
+    if (!cfg.showNews) { stopNews(); return; }
+    try {
+      const r = await fetch(`data/news.json?t=${Math.floor(Date.now() / 300000)}`, { cache: "no-store" });
+      if (!r.ok) throw new Error(r.status);
+      NEWS = await r.json();
+    } catch { NEWS = null; }
+    fillNewsSources();
+    buildNews();
+  }
+  function fillNewsSources() {
+    const q = (NEWS && NEWS.quellen) || [];
+    newsSel.innerHTML = '<option value="alle">Alle gemischt</option>' +
+      q.map((x) => `<option value="${escapeHtml(x.id)}">${escapeHtml(x.name)}</option>`).join("");
+    if (cfg.newsSrc !== "alle" && !q.some((x) => x.id === cfg.newsSrc) && q.length) newsSel.value = q[0].id;
+    else newsSel.value = cfg.newsSrc;
+  }
+  function buildNews() {
+    const q = (NEWS && NEWS.quellen) || [];
+    const sel = newsSel.value || cfg.newsSrc;
+    newsItems = [];
+    for (const src of q) {
+      if (sel !== "alle" && src.id !== sel) continue;
+      for (const it of src.items) newsItems.push({ ...it, src: src.name });
+    }
+    if (sel === "alle") newsItems.sort((a, b) => (b.d || "").localeCompare(a.d || ""));
+    newsItems = newsItems.slice(0, 25);
+    newsIdx = 0;
+    if (!cfg.showNews || !newsItems.length) { stopNews(); return; }
+    newsEl.hidden = false;
+    showNews(false);
+    clearInterval(newsRot);
+    newsRot = setInterval(() => showNews(true), 9000);
+  }
+  function showNews(animate) {
+    if (!newsItems.length) return;
+    const it = newsItems[newsIdx % newsItems.length];
+    newsIdx++;
+    const apply = () => {
+      $("newsSrc").textContent = it.src;
+      $("newsTime").textContent = it.d ? fmtTime.format(new Date(it.d)) : "";
+      $("newsText").textContent = it.t;
+      newsEl.href = it.u;
+      newsEl.title = `${it.src}: ${it.t}`;
+      newsEl.classList.remove("fade");
+    };
+    if (animate && !reduceMotion) { newsEl.classList.add("fade"); setTimeout(apply, 450); } else apply();
+  }
+  function stopNews() { clearInterval(newsRot); newsEl.hidden = true; }
+
   // ------------------------------------------------------------ Bildschirm wach halten
   let wakeLock = null;
   async function applyWake() {
@@ -290,6 +349,8 @@
   bindCheck("optWeather", "showWeather", loadWeather);
   bindCheck("optSeconds", "showSeconds");
   bindCheck("optWake", "wake", applyWake);
+  bindCheck("optNews", "showNews", loadNews);
+  newsSel.addEventListener("change", () => { cfg.newsSrc = newsSel.value; save(); buildNews(); });
   const rot = $("optRotate"); rot.value = String(cfg.rotate);
   rot.addEventListener("change", () => { cfg.rotate = +rot.value; save(); });
   const unit = $("optUnit"); unit.value = cfg.unit;
@@ -374,7 +435,7 @@
 
   // ------------------------------------------------------------ Start
   applyColor(); markSwatch(); renderLoc(); renderOwn();
-  function start() { tick(); loadWeather(); applyWake(); }
+  function start() { tick(); loadWeather(); applyWake(); loadNews(); }
   if (window.MINUTENMOMENT_FACTS) {
     FACTS = window.MINUTENMOMENT_FACTS;
     start();

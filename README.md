@@ -27,6 +27,7 @@ Dazu optional **Datum** und **Wetter** (Open-Meteo, ohne API-Schlüssel) mit fre
 | ☎️ **Kurioses** | Ortsvorwahlen (02:21 → Köln), Notrufnummern, bekannte Zahlen |
 | 📅 **Datum** | z. B. „Samstag, 14. November 2026“ – abschaltbar |
 | 🌤️ **Wetter** | aktuelle Temperatur, Tageshöchst-/-tiefstwert, Ort per Suche oder Standort – abschaltbar |
+| 📰 **Schlagzeilen** | aktuelle Meldungen von tagesschau, Deutschlandfunk, SPIEGEL, ZEIT ONLINE oder heise – wählbar, verlinkt, abschaltbar |
 | ⭐ **Eigene Momente** | Geburtstage & Jahrestage; erscheinen zur passenden Uhrzeit (nur lokal im Browser gespeichert) |
 | 📱 **Wanduhr-Modus** | Vollbild, Bildschirm wach halten, als App installierbar (PWA), offline nutzbar |
 
@@ -62,6 +63,8 @@ python3 -m http.server 8000
 
 Keine Cookies, kein Tracking. Einstellungen und eigene Momente liegen nur im `localStorage` des Browsers.
 Für das Wetter wird der eingestellte Ort (Koordinaten) an [Open-Meteo](https://open-meteo.com/) übermittelt.
+Schlagzeilen werden nicht vom Browser, sondern alle 30 Minuten von einer GitHub Action
+([`tools/fetch_news.py`](tools/fetch_news.py)) aus den öffentlichen RSS-Feeds geholt und als `data/news.json` mitveröffentlicht.
 
 ## Inspiration & Lizenz
 

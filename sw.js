@@ -1,5 +1,5 @@
 // Einfacher Offline-Cache für die App-Hülle. Wetterdaten werden immer live geladen.
-const CACHE = "minutenmoment-v2";
+const CACHE = "minutenmoment-v3";
 const ASSETS = ["./", "index.html", "css/style.css", "js/app.js", "data/facts.json", "data/facts.js", "icon.svg", "manifest.webmanifest"];
 
 self.addEventListener("install", (e) => {
@@ -12,6 +12,7 @@ self.addEventListener("activate", (e) => {
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   if (url.origin !== location.origin) return; // Wetter-API nicht cachen
+  if (url.pathname.endsWith("/news.json")) return; // Schlagzeilen immer frisch
   // Netz zuerst (damit Updates ankommen), Cache als Fallback
   e.respondWith(
     fetch(e.request).then((r) => {
