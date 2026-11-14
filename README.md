@@ -1,6 +1,10 @@
 # Minutenmoment ⏱️
 
-**Jede Minute eine Geschichte.** Eine Uhr im LED-Look, die zu jeder Minute des Tages einen Fakt zeigt –
+**Jede Minute eine Geschichte.**
+
+👉 **Live-Version: https://tbr-brd.github.io/minutenmoment/**
+
+Eine Uhr im LED-Look, die zu jeder Minute des Tages einen Fakt zeigt –
 auf Deutsch: Geschichte, Kalenderdaten, Ereignisse genau zu dieser Uhrzeit, Mathe und Kurioses.
 
 - **19:45** → *Geschichte · 1945 · vor 81 Jahren: Ende des Zweiten Weltkriegs in Europa.*
@@ -27,23 +31,6 @@ Dazu optional **Datum** und **Wetter** (Open-Meteo, ohne API-Schlüssel) mit fre
 | 📱 **Wanduhr-Modus** | Vollbild, Bildschirm wach halten, als App installierbar (PWA), offline nutzbar |
 
 Bedienung: Auf den Fakt tippen oder <kbd>→</kbd> = nächster Fakt · <kbd>F</kbd> = Vollbild · <kbd>S</kbd> = Einstellungen
-
-## Auf GitHub Pages veröffentlichen
-
-1. Neues öffentliches Repository `minutenmoment` anlegen und den Inhalt dieses Ordners hochladen:
-   ```bash
-   cd minutenmoment
-   git init && git add . && git commit -m "Minutenmoment: erste Version"
-   git branch -M main
-   git remote add origin https://github.com/TBR-BRD/minutenmoment.git
-   git push -u origin main
-   ```
-2. Im Repo: **Settings → Pages → Build and deployment → Source: „Deploy from a branch“**, Branch `main`, Ordner `/ (root)`.
-3. Nach ca. 1 Minute ist die Uhr erreichbar unter
-   `https://tbr-brd.github.io/minutenmoment/` – bzw., wenn die eigene Domain bereits für die
-   GitHub-Pages-Hauptseite eingerichtet ist, automatisch auch unter `https://www.lets-make.de/minutenmoment/`.
-
-Es gibt keinen Build-Schritt: Die Seite besteht nur aus HTML, CSS, JS und einer JSON-Datei.
 
 ## Fakten erweitern
 
