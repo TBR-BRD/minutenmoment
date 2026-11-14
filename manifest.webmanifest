@@ -1,0 +1,13 @@
+{
+  "name": "Minutenmoment",
+  "short_name": "Minutenmoment",
+  "description": "Jede Minute eine Geschichte – Uhr mit Geschichts-, Kalender- und Mathe-Fakten.",
+  "lang": "de",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#0a0b0b",
+  "theme_color": "#0a0b0b",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

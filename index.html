@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Minutenmoment – jede Minute eine Geschichte</title>
+  <meta name="description" content="Eine Uhr, die zu jeder Minute einen Fakt zeigt: Geschichte, Kalenderdaten, Mathe und Kurioses – auf Deutsch.">
+  <meta name="theme-color" content="#0a0b0b">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="app">
+    <header class="topbar">
+      <div id="date" class="date" aria-live="polite"></div>
+      <button id="weather" class="weather" type="button" title="Wetter – Ort in den Einstellungen ändern"></button>
+    </header>
+
+    <section class="clock-wrap">
+      <div id="clock" class="clock" role="timer" aria-label="Uhrzeit"></div>
+      <div id="seconds" class="seconds" aria-hidden="true"></div>
+    </section>
+
+    <section class="fact" id="factBox" aria-live="polite">
+      <div class="fact-meta">
+        <span id="factKat" class="chip"></span>
+        <span id="factYear" class="year"></span>
+      </div>
+      <p id="factText" class="fact-text"></p>
+      <div id="dots" class="dots" aria-hidden="true"></div>
+    </section>
+
+    <footer class="bottombar">
+      <span class="brand">Minutenmoment</span>
+      <div class="actions">
+        <button id="btnFull" class="icon-btn" type="button" title="Vollbild (F)" aria-label="Vollbild">
+          <svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+        </button>
+        <button id="btnSettings" class="icon-btn" type="button" title="Einstellungen (S)" aria-label="Einstellungen">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        </button>
+      </div>
+    </footer>
+  </main>
+
+  <dialog id="settings" class="settings">
+    <form method="dialog" class="settings-inner" id="settingsForm">
+      <header>
+        <h2>Einstellungen</h2>
+        <button class="icon-btn" value="close" aria-label="Schließen">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </header>
+
+      <fieldset>
+        <legend>Anzeige</legend>
+        <label class="row"><span>Datum anzeigen</span><input type="checkbox" id="optDate"></label>
+        <label class="row"><span>Wetter anzeigen</span><input type="checkbox" id="optWeather"></label>
+        <label class="row"><span>Sekunden anzeigen</span><input type="checkbox" id="optSeconds"></label>
+        <label class="row"><span>Fakten automatisch wechseln</span>
+          <select id="optRotate">
+            <option value="0">nie</option>
+            <option value="10">alle 10 s</option>
+            <option value="15">alle 15 s</option>
+            <option value="20">alle 20 s</option>
+            <option value="30">alle 30 s</option>
+          </select>
+        </label>
+        <label class="row"><span>Bildschirm wach halten</span><input type="checkbox" id="optWake"></label>
+        <div class="row"><span>Farbe</span>
+          <div class="swatches" id="swatches"></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Wetter-Ort</legend>
+        <div class="loc-current">Aktuell: <strong id="locName">–</strong></div>
+        <div class="loc-search">
+          <input type="search" id="locQuery" placeholder="Ort suchen, z. B. Falkensee" autocomplete="off">
+          <button type="button" id="locSearchBtn" class="btn">Suchen</button>
+        </div>
+        <ul id="locResults" class="loc-results"></ul>
+        <button type="button" id="locGeo" class="btn ghost">📍 Meinen Standort verwenden</button>
+        <label class="row"><span>Einheit</span>
+          <select id="optUnit"><option value="celsius">°C</option><option value="fahrenheit">°F</option></select>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Eigene Momente</legend>
+        <p class="hint">Geburtstage oder Jahrestage. Um 14:11 erscheint dann z. B. „14.11. – Annas Geburtstag“, und passt das Jahr auf die Uhr (z. B. 1945 → 19:45), auch zu dieser Uhrzeit. Gespeichert wird nur in diesem Browser.</p>
+        <ul id="ownList" class="own-list"></ul>
+        <div class="own-add">
+          <input type="text" id="ownName" placeholder="z. B. Annas Geburtstag" maxlength="60">
+          <input type="date" id="ownDate">
+          <button type="button" id="ownAdd" class="btn">+</button>
+        </div>
+      </fieldset>
+
+      <p class="about">
+        Fakten werden vorab berechnet (<code>tools/generate_facts.py</code>). Wetterdaten:
+        <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>.
+        Tasten: <kbd>→</kbd> nächster Fakt · <kbd>F</kbd> Vollbild · <kbd>S</kbd> Einstellungen
+      </p>
+    </form>
+  </dialog>
+
+  <script src="data/facts.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

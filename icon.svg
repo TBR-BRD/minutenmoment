@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0a0b0b"/>
+  <g fill="#ffb000" transform="translate(96 96) skewX(-6)">
+    <!-- stilisierte 7-Segment-„1“ und „4“ mit Doppelpunkt -->
+    <polygon points="112,24 128,40 128,136 112,152 96,136 96,40"/>
+    <polygon points="112,168 128,184 128,280 112,296 96,280 96,184"/>
+    <circle cx="164" cy="110" r="14"/><circle cx="164" cy="210" r="14"/>
+    <polygon points="216,24 232,40 232,136 216,152 200,136 200,40"/>
+    <polygon points="224,160 240,144 304,144 320,160 304,176 240,176"/>
+    <polygon points="328,24 344,40 344,136 328,152 312,136 312,40"/>
+    <polygon points="328,168 344,184 344,280 328,296 312,280 312,184"/>
+  </g>
+</svg>
