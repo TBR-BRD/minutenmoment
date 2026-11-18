@@ -20,6 +20,12 @@ Optionally also the **date**, **weather** and current **headlines**.
 - **08:15** → *"Null-acht-fünfzehn" (German for "run-of-the-mill"): named after the MG 08/15 machine gun.*
 - **17:29** → *1729 – Ramanujan's taxicab number.*
 
+<br>
+<a href="https://www.buymeacoffee.com/thoralf.brandt" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+</a>
+<br>
+
 ## Features
 
 | | |

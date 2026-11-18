@@ -18,6 +18,12 @@ Dazu auf Wunsch **Datum**, **Wetter** und aktuelle **Schlagzeilen**.
 - **08:15** → *Null-acht-fünfzehn: benannt nach dem MG 08/15.*
 - **17:29** → *1729 – die Taxi-Zahl von Ramanujan.*
 
+<br>
+<a href="https://www.buymeacoffee.com/thoralf.brandt" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+</a>
+<br>
+
 ## Funktionen
 
 | | |
