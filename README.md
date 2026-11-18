@@ -1,5 +1,7 @@
 # Minutenmoment ⏱️
 
+🇩🇪 Deutsch · [🇬🇧 English](README_EN.md)
+
 **Jede Minute eine Geschichte.**
 
 👉 **Live-Version: https://tbr-brd.github.io/minutenmoment/**
